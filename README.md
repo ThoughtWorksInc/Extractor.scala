@@ -1,4 +1,6 @@
-# Extractor.scala
+# Extractor.scala <a href="http://thoughtworks.com/"><img align="right" src="https://www.thoughtworks.com/imgs/tw-logo.png" title="ThoughtWorks" height="15"/></a>
+
+[![Build Status](https://travis-ci.org/ThoughtWorksInc/Extractor.scala.svg?branch=master)](https://travis-ci.org/ThoughtWorksInc/Extractor.scala)
 
 **Extractor.scala** is a library to convert between `A => Option[B]`, `PartialFunction[A, B]` and extractor objects for pattern matching.
 
