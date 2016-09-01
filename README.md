@@ -4,6 +4,12 @@
 
 **Extractor.scala** is a library to convert between `A => Option[B]`, `PartialFunction[A, B]` and extractor objects for pattern matching.
 
+## Usage
+``` sbt
+// Add this line in your build.sbt
+libraryDependencies += "com.thoughtworks" %% "extractor" % "1.0.0"
+```
+
 ``` scala
 import com.thoughtworks.Extractor._
 
