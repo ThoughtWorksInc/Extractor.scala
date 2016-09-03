@@ -12,13 +12,14 @@ libraryDependencies += "com.thoughtworks" %% "extractor" % "1.0.0"
 
 ``` scala
 import com.thoughtworks.Extractor._
+import com.thoughtworks.Extractor._
 
-// Convert a PartialFunction to a pattern
+// Define a PartialFunction
 val pf: PartialFunction[Int, String] = {
   case 1 => "matched by PartialFunction"
 }
 
-// Convert an optional function to a pattern
+// Define an optional function
 val f: Int => Option[String] = { i =>
   if (i == 2) {
     Some("matched by optional function")
@@ -31,11 +32,11 @@ val f: Int => Option[String] = { i =>
 val pf2: PartialFunction[Int, String] = f.unlift
 
 util.Random.nextInt(4) match {
-  case pf.extract(m) =>
+  case pf.extract(m) => // Convert a PartialFunction to a pattern
     println(m)
-  case f.extract(m) =>
+  case f.extract(m) => // Convert an optional function to a pattern
     println(m)
-  case pf2.extract(m) =>
+  case pf2.extract(m) => // Convert a PartialFunction to a pattern
     throw new AssertionError("This case should never occur because it has the same condition as `f.extract`.")
   case _ =>
     println("Not matched")
