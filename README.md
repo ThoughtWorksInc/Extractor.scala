@@ -12,7 +12,6 @@ libraryDependencies += "com.thoughtworks" %% "extractor" % "1.0.0"
 
 ``` scala
 import com.thoughtworks.Extractor._
-import com.thoughtworks.Extractor._
 
 // Define a PartialFunction
 val pf: PartialFunction[Int, String] = {
