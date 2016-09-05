@@ -7,7 +7,7 @@
 ## Usage
 ``` sbt
 // Add this line in your build.sbt
-libraryDependencies += "com.thoughtworks.extractor" %% "extractor" % "1.0.0"
+libraryDependencies += "com.thoughtworks.extractor" %% "extractor" % "latest.release"
 ```
 
 ``` scala
