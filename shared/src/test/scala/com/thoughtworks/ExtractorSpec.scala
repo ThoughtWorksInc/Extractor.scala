@@ -20,6 +20,17 @@ class ExtractorSpec extends FreeSpec with Matchers {
 
   }
 
+  "PartialFunction toExtractor for Seq" in {
+    val pf: PartialFunction[Int, Seq[String]] = {
+      case 1 => Seq("match1", "match2")
+    }
+    1 match {
+      case pf.extractSeq(m1, m2) =>
+        m1 should be("match1")
+        m2 should be("match2")
+    }
+  }
+
   "example" in {
     val pf: PartialFunction[Int, String] = {
       case 1 => "matched by PartialFunction"

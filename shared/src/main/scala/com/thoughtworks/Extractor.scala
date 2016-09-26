@@ -39,6 +39,22 @@ package com.thoughtworks
   */
 object Extractor {
 
+  sealed trait SeqExtractor[-A, +B] {
+    def unapplySeq(a: A): Option[Seq[B]]
+  }
+
+  implicit final class PartialFunctionToSeqExtractor[-A, +B] private[Extractor](underlying: PartialFunction[A, Seq[B]]) {
+    def extractSeq = new SeqExtractor[A, B] {
+      def unapplySeq(a: A) = underlying.lift(a)
+    }
+  }
+
+  implicit final class OptionFunctionToSeqExtractor[-A, +B] private[Extractor](underlying: A => Option[Seq[B]]) {
+    def extractSeq = new SeqExtractor[A, B] {
+      def unapplySeq(a: A) = underlying(a)
+    }
+  }
+
   implicit final class PartialFunctionToExtractor[-A, +B] private[Extractor](underlying: PartialFunction[A, B]) {
     def extract = new Extractor[A, B] {
       def unapply(a: A) = underlying.lift(a)
