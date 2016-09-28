@@ -31,6 +31,18 @@ class ExtractorSpec extends FreeSpec with Matchers {
     }
   }
 
+  "PartialOptionFunction toExtractor" in {
+
+    val pf: PartialFunction[Int, Option[String]] = {
+      case 1 => Some("match")
+    }
+
+    1 match {
+      case pf.extract(m) => m should be(Some("match"))
+    }
+
+  }
+
   "example" in {
     val pf: PartialFunction[Int, String] = {
       case 1 => "matched by PartialFunction"

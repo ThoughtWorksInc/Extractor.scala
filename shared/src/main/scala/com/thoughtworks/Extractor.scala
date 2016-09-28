@@ -1,5 +1,32 @@
 package com.thoughtworks
 
+private[thoughtworks] sealed trait LowPrirorityExtractor {
+
+  sealed trait SeqExtractor[-A, +B] {
+    def unapplySeq(a: A): Option[Seq[B]]
+  }
+
+  implicit final class OptionFunctionToSeqExtractor[-A, +B] private[LowPrirorityExtractor](underlying: A => Option[Seq[B]]) {
+    def extractSeq = new SeqExtractor[A, B] {
+      def unapplySeq(a: A) = underlying(a)
+    }
+  }
+
+  implicit final class OptionFunctionToExtractor[-A, +B] private[LowPrirorityExtractor](underlying: A => Option[B]) {
+    def extract = new Extractor[A, B] {
+      def unapply(a: A) = underlying(a)
+    }
+  }
+
+}
+
+/**
+  * A pattern that can be used in `match` / `case` expressions.
+  */
+sealed trait Extractor[-A, +B] {
+  def unapply(a: A): Option[B]
+}
+
 /**
   * Utilities to convert between `A => Option[B]`, `PartialFunction[A, B]` and [[Extractor]].
   *
@@ -37,21 +64,11 @@ package com.thoughtworks
     }}}
   *
   */
-object Extractor {
-
-  sealed trait SeqExtractor[-A, +B] {
-    def unapplySeq(a: A): Option[Seq[B]]
-  }
+object Extractor extends LowPrirorityExtractor {
 
   implicit final class PartialFunctionToSeqExtractor[-A, +B] private[Extractor](underlying: PartialFunction[A, Seq[B]]) {
     def extractSeq = new SeqExtractor[A, B] {
       def unapplySeq(a: A) = underlying.lift(a)
-    }
-  }
-
-  implicit final class OptionFunctionToSeqExtractor[-A, +B] private[Extractor](underlying: A => Option[Seq[B]]) {
-    def extractSeq = new SeqExtractor[A, B] {
-      def unapplySeq(a: A) = underlying(a)
     }
   }
 
@@ -61,23 +78,10 @@ object Extractor {
     }
   }
 
-  implicit final class OptionFunctionToExtractor[-A, +B] private[Extractor](underlying: A => Option[B]) {
-    def extract = new Extractor[A, B] {
-      def unapply(a: A) = underlying(a)
-    }
-  }
-
   implicit final class OptionFunctionToPartialFunction[-A, +B] private[Extractor](underlying: A => Option[B]) {
     def unlift: PartialFunction[A, B] = {
       case underlying.extract(b) => b
     }
   }
 
-}
-
-/**
-  * A pattern that can be used in `match` / `case` expressions.
-  */
-sealed trait Extractor[-A, +B] {
-  def unapply(a: A): Option[B]
 }
