@@ -1,18 +1,18 @@
 package com.thoughtworks
 
-private[thoughtworks] sealed trait LowPrirorityExtractor {
-
+private[thoughtworks] sealed trait LowPriorityExtractor {
+  
   sealed trait SeqExtractor[-A, +B] {
     def unapplySeq(a: A): Option[Seq[B]]
   }
-
-  implicit final class OptionFunctionToSeqExtractor[-A, +B] private[LowPrirorityExtractor](underlying: A => Option[Seq[B]]) {
+  
+  implicit final class OptionFunctionToSeqExtractor[-A, +B] private[LowPriorityExtractor](underlying: A => Option[Seq[B]]) {
     def extractSeq = new SeqExtractor[A, B] {
       def unapplySeq(a: A) = underlying(a)
     }
   }
 
-  implicit final class OptionFunctionToExtractor[-A, +B] private[LowPrirorityExtractor](underlying: A => Option[B]) {
+  implicit final class OptionFunctionToExtractor[-A, +B] private[LowPriorityExtractor](underlying: A => Option[B]) {
     def extract = new Extractor[A, B] {
       def unapply(a: A) = underlying(a)
     }
@@ -26,6 +26,7 @@ private[thoughtworks] sealed trait LowPrirorityExtractor {
 sealed trait Extractor[-A, +B] {
   def unapply(a: A): Option[B]
 }
+
 
 /**
   * Utilities to convert between `A => Option[B]`, `PartialFunction[A, B]` and [[Extractor]].
@@ -64,7 +65,7 @@ sealed trait Extractor[-A, +B] {
     }}}
   *
   */
-object Extractor extends LowPrirorityExtractor {
+object Extractor extends LowPriorityExtractor {
 
   implicit final class PartialFunctionToSeqExtractor[-A, +B] private[Extractor](underlying: PartialFunction[A, Seq[B]]) {
     def extractSeq = new SeqExtractor[A, B] {
