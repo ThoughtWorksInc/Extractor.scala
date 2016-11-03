@@ -25,7 +25,7 @@ class ExtractorSpec extends FreeSpec with Matchers {
       case 1 => Seq("match1", "match2")
     }
     1 match {
-      case pf.extractSeq(m1, m2) =>
+      case pf.extract.seq(m1, m2) =>
         m1 should be("match1")
         m2 should be("match2")
     }
