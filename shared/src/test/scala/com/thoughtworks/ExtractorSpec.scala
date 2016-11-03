@@ -62,7 +62,7 @@ class ExtractorSpec extends FreeSpec with Matchers {
           m
         case f.extract(m) =>
           m
-        case pf2.extract(m) =>
+        case pf2.extract.extract.extract.extract.extract(m) =>
           throw new AssertionError("This case should never occur because it has the same condition as `f.extract`.")
         case _ =>
           "Not matched"
