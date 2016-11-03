@@ -23,10 +23,10 @@ private[thoughtworks] sealed trait LowPriorityExtractor {
 /**
   * A pattern that can be used in `match` / `case` expressions.
   */
-sealed trait Extractor[-A, +B] {
+sealed trait Extractor[-A, +B] extends (A => Option[B]) {
   def unapply(a: A): Option[B]
+  final def apply(a: A) = unapply(a)
 }
-
 
 /**
   * Utilities to convert between `A => Option[B]`, `PartialFunction[A, B]` and [[Extractor]].
