@@ -1,5 +1,8 @@
 package com.thoughtworks
 
+import shapeless._
+import shapeless.syntax.typeable._
+
 private[thoughtworks] sealed trait LowLowPriorityExtractor {
 
   implicit final class FunctionToExtractor[-A, +B] private[LowLowPriorityExtractor] (underlying: A => B) {
@@ -98,6 +101,15 @@ object Extractor extends LowPriorityExtractor {
   implicit final class OptionFunctionToPartialFunction[-A, +B] private[Extractor](underlying: A => Option[B]) {
     def unlift: PartialFunction[A, B] = {
       case underlying.extract(b) => b
+    }
+  }
+
+  implicit final class OptionFunctionToTypeableExtractor[-A: Typeable, +B] private[Extractor] (
+      underlying: A => Option[B]) {
+    def typecheck = new Extractor[A, B] {
+      override def unapply(a: A): Option[B] = {
+        a.cast[A].flatMap(underlying)
+      }
     }
   }
 
