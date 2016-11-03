@@ -1,7 +1,19 @@
 package com.thoughtworks
 
-private[thoughtworks] sealed trait LowPriorityExtractor {
-  
+private[thoughtworks] sealed trait LowLowPriorityExtractor {
+
+  implicit final class FunctionToExtractor[-A, +B] private[LowLowPriorityExtractor] (underlying: A => B) {
+    def extract = new Extractor[A, B] {
+      override def unapply(a: A): Some[B] = {
+        Some(underlying(a))
+      }
+    }
+  }
+
+}
+
+private[thoughtworks] sealed trait LowPriorityExtractor extends LowLowPriorityExtractor {
+
   sealed trait SeqExtractor[-A, +B] {
     def unapplySeq(a: A): Option[Seq[B]]
   }
