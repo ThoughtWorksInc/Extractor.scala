@@ -41,3 +41,6 @@ util.Random.nextInt(4) match {
     println("Not matched")
 }
 ```
+## Links
+
+ * [API Documentation](https://oss.sonatype.org/service/local/repositories/releases/archive/com/thoughtworks/extractor/extractor_2.12/1.1.1/extractor_2.12-1.1.1-javadoc.jar/!/com/thoughtworks/Extractor$.html#SeqExtractor[-A,+B]extendsAnyRef)
