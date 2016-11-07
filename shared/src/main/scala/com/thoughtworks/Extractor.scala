@@ -68,7 +68,7 @@ sealed trait Extractor[-A, +B] extends (A => Option[B]) {
     }
 
     // Convert an optional function to a PartialFunction
-    val pf2: PartialFunction[Int, String] = f.unlift
+    val pf2: PartialFunction[Int, String] = Function.unlift(f)
 
     util.Random.nextInt(4) match {
       case pf.extract(m) => // Convert a PartialFunction to a pattern
@@ -99,6 +99,7 @@ object Extractor extends LowPriorityExtractor {
     }
   }
 
+  @deprecated("Use Function.unlift instead", "1.1.0")
   implicit final class OptionFunctionToPartialFunction[-A, +B] private[Extractor] (underlying: A => Option[B]) {
     def unlift: PartialFunction[A, B] = {
       case underlying.extract(b) => b

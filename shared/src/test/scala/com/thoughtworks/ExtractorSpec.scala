@@ -54,7 +54,7 @@ class ExtractorSpec extends FreeSpec with Matchers {
         None
       }
     }
-    val pf2: PartialFunction[Int, String] = f.unlift
+    val pf2: PartialFunction[Int, String] = Function.unlift(f)
 
     def test(i: Int) = {
       i match {
