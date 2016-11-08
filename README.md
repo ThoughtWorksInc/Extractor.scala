@@ -28,7 +28,7 @@ val f: Int => Option[String] = { i =>
 }
 
 // Convert an optional function to a PartialFunction
-val pf2: PartialFunction[Int, String] = f.unlift
+val pf2: PartialFunction[Int, String] = Function.unlift(f)
 
 util.Random.nextInt(4) match {
   case pf.extract(m) => // Convert a PartialFunction to a pattern
