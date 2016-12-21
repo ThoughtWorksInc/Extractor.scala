@@ -47,7 +47,7 @@ sealed trait Extractor[-A, +B] extends (A => Option[B]) {
 }
 
 /**
-  * Utilities to convert between `A => Option[B]`, `PartialFunction[A, B]` and [[Extractor]].
+  * Utilities to convert between `A => Option[B]`, [[scala.PartialFunction]] and [[Extractor]].
   *
   * @example
     {{{
