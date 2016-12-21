@@ -26,7 +26,7 @@ private[thoughtworks] sealed trait LowPriorityExtractor extends LowLowPriorityEx
     def seq = new SeqExtractor[A, B] {
       def unapplySeq(a: A) = underlying(a)
     }
-    @deprecated("Use f.extract.seq instead", "1.1.0")
+    @deprecated("Use `f.extract.seq` instead", "1.1.0")
     def extractSeq = seq
   }
 
@@ -85,7 +85,7 @@ sealed trait Extractor[-A, +B] extends (A => Option[B]) {
   */
 object Extractor extends LowPriorityExtractor {
 
-  @deprecated("Use f.extract.seq instead", "1.1.0")
+  @deprecated("Use `f.extract.seq` instead", "1.1.0")
   implicit final class PartialFunctionToSeqExtractor[-A, +B] private[Extractor] (
       underlying: PartialFunction[A, Seq[B]]) {
     def extractSeq = new SeqExtractor[A, B] {
@@ -99,7 +99,7 @@ object Extractor extends LowPriorityExtractor {
     }
   }
 
-  @deprecated("Use Function.unlift instead", "1.1.0")
+  @deprecated("Use `Function.unlift` instead", "1.1.0")
   implicit final class OptionFunctionToPartialFunction[-A, +B] private[Extractor] (underlying: A => Option[B]) {
     def unlift: PartialFunction[A, B] = {
       case underlying.extract(b) => b
