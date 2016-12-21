@@ -1,6 +1,8 @@
 # Extractor.scala <a href="http://thoughtworks.com/"><img align="right" src="https://www.thoughtworks.com/imgs/tw-logo.png" title="ThoughtWorks" height="15"/></a>
 
 [![Build Status](https://travis-ci.org/ThoughtWorksInc/Extractor.scala.svg?branch=master)](https://travis-ci.org/ThoughtWorksInc/Extractor.scala)
+[![Latest version](https://index.scala-lang.org/thoughtworksinc/extractor.scala/extractor/latest.svg)](https://index.scala-lang.org/thoughtworksinc/extractor.scala/extractor)
+[![Scaladoc](https://javadoc.io/badge/com.thoughtworks.extractor/extractor_2.12.svg?label=scaladoc)](https://javadoc.io/page/com.thoughtworks.extractor/extractor_2.12/latest/com/thoughtworks/index.html)
 
 **Extractor.scala** is a library to convert between `A => Option[B]`, `PartialFunction[A, B]` and extractor objects for pattern matching.
 
@@ -41,6 +43,3 @@ util.Random.nextInt(4) match {
     println("Not matched")
 }
 ```
-## Links
-
- * [API Documentation](https://oss.sonatype.org/service/local/repositories/releases/archive/com/thoughtworks/extractor/extractor_2.12/1.1.1/extractor_2.12-1.1.1-javadoc.jar/!/com/thoughtworks/index.html)
