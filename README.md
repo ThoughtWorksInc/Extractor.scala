@@ -43,3 +43,18 @@ util.Random.nextInt(4) match {
     println("Not matched")
 }
 ```
+
+You can also use `.extract.seq` extract elements of a sequence data.
+
+``` scala
+import com.thoughtworks.Extractor._
+
+val csvRow: String => Option[Seq[String]] = {
+  line => Some(line.split(','))
+}
+
+"foo,bar,baz" match {
+  case csvRow.extract.seq(cell0, cell1, cell2) =>
+    println(s"cell1=$cell1") // Output: cell1=bar
+}
+```
