@@ -49,8 +49,8 @@ You can also use `.extract.seq` extract elements of a sequence data.
 ``` scala
 import com.thoughtworks.Extractor._
 
-val csvRow: String => Option[Seq[String]] = {
-  line => Some(line.split(','))
+val csvRow: String => Option[Seq[String]] = { line =>
+  Some(line.split(','))
 }
 
 "foo,bar,baz" match {
