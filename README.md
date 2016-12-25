@@ -44,7 +44,7 @@ util.Random.nextInt(4) match {
 }
 ```
 
-You can also use `.extract.seq` extract elements of a sequence data.
+You can also use `.extract.seq` to extract elements of a sequence data.
 
 ``` scala
 import com.thoughtworks.Extractor._
