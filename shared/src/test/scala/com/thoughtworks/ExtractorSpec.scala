@@ -74,23 +74,4 @@ class ExtractorSpec extends FreeSpec with Matchers {
     test(3) should be("Not matched")
   }
 
-  "type checking" in {
-    val pairToString = { pair: (Seq[Int], List[String]) =>
-      (pair._1 ++ pair._2).mkString
-    }
-
-    def test(a: Any) = {
-      a match {
-        case pairToString.extract.typecheck(s) => s"strict $s"
-        case pairToString.extract(s) => s
-        case _ => "Not matched"
-      }
-    }
-
-    test((Nil, List("1"))) should be("strict 1")
-    test((Seq("xxx"), List(3))) should be("xxx3")
-    test(0.5) should be("Not matched")
-
-  }
-
 }
