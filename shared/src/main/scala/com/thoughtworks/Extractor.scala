@@ -29,6 +29,16 @@ private[thoughtworks] sealed trait LowPriorityExtractor extends LowLowPriorityEx
     def extract = new Extractor[A, B] {
       def unapply(a: A) = underlying(a)
     }
+
+    def forall = new Extractor[Seq[A], Seq[B]] {
+      override def unapply(a: Seq[A]): Option[Seq[B]] = {
+        Some(a.map {
+          case OptionFunctionToExtractor.this.extract(b) => b
+          case _ => return None
+        })
+      }
+    }
+
   }
 
 }

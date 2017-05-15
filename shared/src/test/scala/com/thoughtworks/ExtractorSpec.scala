@@ -1,12 +1,12 @@
 package com.thoughtworks
 
-import org.scalatest.{FreeSpec, Matchers}
+import org.scalatest.{FreeSpec, Inside, Matchers}
 import Extractor._
 
 /**
   * @author 杨博 (Yang Bo) &lt;pop.atry@gmail.com&gt;
   */
-class ExtractorSpec extends FreeSpec with Matchers {
+class ExtractorSpec extends FreeSpec with Matchers with Inside {
 
   "PartialFunction toExtractor" in {
 
@@ -28,6 +28,19 @@ class ExtractorSpec extends FreeSpec with Matchers {
       case pf.extract.seq(m1, m2) =>
         m1 should be("match1")
         m2 should be("match2")
+    }
+  }
+
+  "PartialFunction toExtractor for all" in {
+    val pf: PartialFunction[Int, String] = {
+      case 1 => "match1"
+    }
+    inside(Seq(1, 1)) {
+      case pf.extract.forall(m1) =>
+        m1 should be(Seq("match1", "match1"))
+    }
+    Seq(1, 2) shouldNot matchPattern {
+      case pf.extract.forall(m1) =>
     }
   }
 
