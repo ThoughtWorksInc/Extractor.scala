@@ -2,7 +2,7 @@ publishArtifact := false
 
 organization in ThisBuild := "com.thoughtworks.extractor"
 
-crossScalaVersions in ThisBuild := Seq("2.10.7", "2.11.12", "2.12.6", "2.13.0-M4")
+crossScalaVersions in ThisBuild := Seq("2.10.7", "2.11.12", "2.12.6", "2.13.0-M4", "2.13.0-M5")
 
 lazy val extractor = crossProject in file(".")
 
