@@ -1,1 +1,1 @@
-libraryDependencies += "org.scalatest" %%% "scalatest" % "3.0.8-RC2" % Test
+libraryDependencies += "org.scalatest" %%% "scalatest" % "3.1.0-SNAP10" % Test
