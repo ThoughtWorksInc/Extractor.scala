@@ -1,12 +1,14 @@
 package com.thoughtworks
 
-import org.scalatest.{FreeSpec, Inside, Matchers}
+import org.scalatest.Inside
 import Extractor._
+import org.scalatest.freespec.AnyFreeSpec
+import org.scalatest.matchers.should.Matchers
 
 /**
   * @author 杨博 (Yang Bo) &lt;pop.atry@gmail.com&gt;
   */
-class ExtractorSpec extends FreeSpec with Matchers with Inside {
+class ExtractorSpec extends AnyFreeSpec with Matchers with Inside {
 
   "PartialFunction toExtractor" in {
 
