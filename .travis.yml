@@ -14,11 +14,12 @@ scala:
   - 2.13.2
 
 jdk:
-  - openjdk8
+  - openjdk11
 
 before_cache:
-  - find $HOME/.sbt -name '*.lock' -delete
-  - find $HOME/.ivy2 -name 'ivydata-*.properties' -delete
+  - rm -fv $HOME/.ivy2/.sbt.ivy.lock
+  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
+  - find $HOME/.sbt        -name "*.lock"               -print -delete
 
 cache:
   directories:
