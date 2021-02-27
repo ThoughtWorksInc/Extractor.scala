@@ -46,5 +46,5 @@ sbt_args: $SBT_ARGS
 
 jobs:
   exclude:
-  - scala: 2.10.7
+  - scala: 2.13.5
     env: SBT_ARGS=
